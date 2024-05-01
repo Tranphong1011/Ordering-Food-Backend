@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 const createMyRestaurant = async (req: Request, res: Response) => {
   try {
-    const existingRestaurant = await Restaurant.find({ user: req.userId });
+    const existingRestaurant = await Restaurant.findOne({ user: req.userId });
     if (existingRestaurant) {
       return res.status(409).json({ message: "Restaurant already exists" });
     }
@@ -29,4 +29,14 @@ const createMyRestaurant = async (req: Request, res: Response) => {
   }
 };
 
-export default { createMyRestaurant };
+const fetchRestaurants = async (req: Request, res: Response) => {
+  try {
+    const restaurants = await Restaurant.find();
+    res.status(200).json(restaurants.map((restaurant) => restaurant.toObject()));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching users" });
+  }
+};
+
+export default { createMyRestaurant, fetchRestaurants };
