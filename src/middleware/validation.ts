@@ -8,7 +8,7 @@ const handleValidationErrors = async (
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ error: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
   next();
 };
@@ -42,11 +42,7 @@ export const validateMyRestaurantRequest = [
     .not()
     .isEmpty()
     .withMessage("Cuisines array cannot be empty"),
-  body("menuItems")
-    .isArray()
-    .withMessage("Menu Items must be an array")
-    .notEmpty()
-    .withMessage("Menu Items cannot be empty"),
+  body("menuItems").isArray().withMessage("Menu Items must be an array"),
   body("menuItems.*.name")
     .isString()
     .notEmpty()
