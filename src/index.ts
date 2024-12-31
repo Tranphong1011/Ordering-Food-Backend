@@ -20,11 +20,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello!" });
-});
-app.get("/", async (req: Request, res: Response) => {
-  res.send("Welcome to the Express server!");
+app.get("/test", (req: Request, res: Response) => {
+  res.json({ message: "Tesk ok!" });
 });
 
 app.use("/api/my/user", myUserRoute);

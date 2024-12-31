@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { auth } from "express-oauth2-jwt-bearer";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
-import { ExplainVerbosity } from "mongodb";
+
 
 declare global {
   namespace Express {

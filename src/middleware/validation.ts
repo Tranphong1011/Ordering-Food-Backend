@@ -39,8 +39,7 @@ export const validateMyRestaurantRequest = [
   body("cuisines")
     .isArray()
     .withMessage("Cuisine must be an array")
-    .not()
-    .isEmpty()
+    .notEmpty()
     .withMessage("Cuisines array cannot be empty"),
   body("menuItems").isArray().withMessage("Menu Items must be an array"),
   body("menuItems.*.name")
