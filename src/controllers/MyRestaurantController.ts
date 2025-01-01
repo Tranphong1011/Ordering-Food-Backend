@@ -29,7 +29,7 @@ const createMyRestaurant = async (req: Request, res: Response) => {
   }
 };
 
-const fetchRestaurants = async (req: Request, res: Response) => {
+const getAllRestaurants = async (req: Request, res: Response) => {
   try {
     const restaurants = await Restaurant.find();
     res.status(200).json(restaurants.map((restaurant) => restaurant.toObject()));
@@ -39,4 +39,16 @@ const fetchRestaurants = async (req: Request, res: Response) => {
   }
 };
 
-export default { createMyRestaurant, fetchRestaurants };
+const getCurrentRestaurant = async (req: Request, res: Response) => {
+  try {
+    const restaurant = await Restaurant.findOne({user: req.userId });
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.status(200).json(restaurant.toObject());
+  } catch (error) {
+    console.log('error', error);
+    res.status(500).json({ message: 'Error fetching restaurant' });
+  }
+};
+export default { createMyRestaurant, getAllRestaurants ,getCurrentRestaurant};

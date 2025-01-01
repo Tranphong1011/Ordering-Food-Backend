@@ -25,6 +25,8 @@ router.post(
   jwtParse,
   MyRestaurantController.createMyRestaurant
 );
-router.get("/restaurantList", MyRestaurantController.fetchRestaurants);
+router.get("/restaurantList", MyRestaurantController.getAllRestaurants);
 
+router.get("/", jwtCheck, jwtParse, MyRestaurantController.getCurrentRestaurant);
+// router.get("/", MyRestaurantController.getCurrentRestaurant);
 export default router;
