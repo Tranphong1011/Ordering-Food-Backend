@@ -28,5 +28,8 @@ router.post(
 router.get("/restaurantList", MyRestaurantController.getAllRestaurants);
 
 router.get("/", jwtCheck, jwtParse, MyRestaurantController.getCurrentRestaurant);
-// router.get("/", MyRestaurantController.getCurrentRestaurant);
+
+router.put("/", myUploadMiddleware, validateMyRestaurantRequest, jwtCheck, jwtParse, MyRestaurantController.updateMyRestaurant);
+
+
 export default router;
